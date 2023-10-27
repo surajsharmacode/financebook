@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/financebook/static/css/main.7c4ca8b0.css",
+    "main.js": "/financebook/static/js/main.98dc1049.js",
+    "static/js/787.071e1f54.chunk.js": "/financebook/static/js/787.071e1f54.chunk.js",
+    "static/media/transactions.svg": "/financebook/static/media/transactions.004d9f02317991455e50b36d9dae2a26.svg",
+    "index.html": "/financebook/index.html",
+    "static/media/user.svg": "/financebook/static/media/user.0d3cde29811636d534d72a2ea4f24dad.svg",
+    "static/media/search.svg": "/financebook/static/media/search.4da02613dcc315ee7fdf5edc7d9d5653.svg",
+    "main.7c4ca8b0.css.map": "/financebook/static/css/main.7c4ca8b0.css.map",
+    "main.98dc1049.js.map": "/financebook/static/js/main.98dc1049.js.map",
+    "787.071e1f54.chunk.js.map": "/financebook/static/js/787.071e1f54.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7c4ca8b0.css",
+    "static/js/main.98dc1049.js"
+  ]
+}
