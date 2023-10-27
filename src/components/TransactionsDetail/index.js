@@ -9,7 +9,7 @@ import  {Button} from 'antd';
 //import { type } from '@testing-library/user-event/dist/type';
 //import AddExpenseModal from '../Modals/addExpense';
 
-const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData}) => {
+const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData }) => {
     const {Option} = Select;
     const [searchTrasnaction,setSearchTransaction] = useState('');
     const [typeFilter,setTypeFilter]=useState('');
@@ -24,11 +24,12 @@ const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData
     // const filteredTransaction = transactionData.filter((transaction)=>{
     //     transaction.name.toLowerCase().includes(searchTrasnaction.toLocaleLowerCase())
     // })
-    const filteredTransaction = transactionData.filter((transaction)=>
-    transaction.name.toLowerCase().includes(searchTrasnaction.toLowerCase()) && transaction.type.includes(typeFilter)
 
-    
-)
+     const filteredTransaction = transactionData.filter((transaction)=>
+    transaction.name.toLowerCase().includes(searchTrasnaction.toLowerCase())
+     && transaction.type.includes(typeFilter)
+    )
+
     const sortedTransactions = filteredTransaction.sort((a,b)=>{
         if(sortKey === 'date'){
             return new Date(a.date)-new Date(b.date);
@@ -39,6 +40,7 @@ const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData
         return 0;
     }
     )
+    
        
 
     const columns = [
@@ -72,12 +74,14 @@ const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData
           // dataIndex: 'key',
           // render: (key)=>(
           //   <Space size="small">
-          //     <Button type='primary' onClick={()=>updateTransaction(transactionData)}>EDIT</Button>
+          //     <Button type='primary' onClick={(e)=>updateTransaction(transactionData)}>EDIT</Button>
           //     <Button type='danger' style={{background: "red",borderColor: 'red', color: "white"}} >DELETE</Button>
           //   </Space>
           // )
           // }
       ];
+      
+    
       
     
       function exportCSV() {

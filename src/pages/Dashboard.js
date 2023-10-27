@@ -31,7 +31,7 @@ const [totalBalance,setTotalBalance]=useState(0) //totalBalance is current balan
 const [transactionId,setTransactionID]=useState('');
 
 console.log("transaction-ID>>>>>>>>",transactionId);
-
+console.log("transactionData>>",transactionsData);
 
 
   const showExpenseModal = () => {
@@ -109,22 +109,22 @@ toast.success("Transactions Fetched")
   setLoading(false)
 }
 
-// async function updateTransaction(transactionData){
+async function updateTransaction(transactionData){
   
-//   const transactionRef = collection(db, "transactions",transactionData.id)
-//   if(transactionData.type==='income'){
-//     <AddIncomeModal
-//     isIncomeModalVisible={isIncomeModalVisible}
-//     handleIncomeCancel={handleIncomeCancel}
-//     onFinish={onFinish}
-//   />
-//   }
+  const transactionRef = collection(db, "transactions",transactionData.id)
+  if(transactionData.type==='income'){
+    <AddIncomeModal
+    isIncomeModalVisible={isIncomeModalVisible}
+    handleIncomeCancel={handleIncomeCancel}
+    onFinish={onFinish}
+  />
+  }
   
-//   // await updateDoc(transactionRef, {
+  // await updateDoc(transactionRef, {
     
-//   // });
+  // });
      
-// }
+}
 
 // useEffect(()=>{
   
@@ -222,7 +222,7 @@ toast.success("Transactions Fetched")
     addTransaction={addTransaction} 
     fetchTransactionsData={fetchTransactionsData} 
     // getuserID={getuserIdHandler}/
-   // updateTransaction={updateTransaction}
+   updateTransaction={updateTransaction}
    />
     </div>
   );
