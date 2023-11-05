@@ -4,7 +4,7 @@ import Cards from "../components/card";
 import { Modal } from "antd";
 import AddExpenseModal from "../components/Modals/addExpense";
 import AddIncomeModal from "../components/Modals/addIncome";
-import { collection, doc, updateDoc} from "firebase/firestore";
+import { collection, doc,where,deleteDoc} from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import moment from "moment/moment";
@@ -29,6 +29,7 @@ const [income,setIncome]=useState(0);
 const [expense,setExpense]=useState(0);
 const [totalBalance,setTotalBalance]=useState(0) //totalBalance is current balance
 const [transactionId,setTransactionID]=useState('');
+const [editedtransaction,setEditedTransaction]=useState([])
 
 console.log("transaction-ID>>>>>>>>",transactionId);
 console.log("transactionData>>",transactionsData);
@@ -55,6 +56,8 @@ console.log("transactionData>>",transactionsData);
       amount: parseFloat(values.amount),
       tag: values.tag,
       name: values.name,
+      
+      
      
     };
     addTransaction(newTransaction)
@@ -72,6 +75,7 @@ console.log("transactionData>>",transactionsData);
       let newArr = transactionsData;
       newArr.push(transaction)
        calculateBalance();
+       fetchTransactionsData();
       
       }
       catch(e){
@@ -109,9 +113,48 @@ toast.success("Transactions Fetched")
   setLoading(false)
 }
 
+async function resetTransaction(){
+try {
+  const user = auth.currentUser;
+  console.log("user to be reet",user)
+  if(!user){
+    toast.error("user doesn't exist")
+    return
+  }
+  const userUid= user.uid;
+  console.log("uid of user to be deleted",userUid)
+
+  const userTransactionDataRef = collection(db, 'transactions');
+      const q = query(userTransactionDataRef, where('userId', '==', userUid));
+
+      // Retrieve all documents associated with the user
+      const querySnapshot = await getDocs(q);
+      console.log("querySnap",querySnapshot);
+
+      querySnapshot.forEach((docSnap) => {
+        const docRef = doc(db, 'transactions', docSnap.id);
+       // db.collection('transactions').doc(docSnap.id).delete();
+        // console.log("docsnapID>>",db.id)
+        deleteDoc(docRef).then(()=>{
+          console.log('Document deleted successfully');
+          toast.success('deleted')
+        }).catch((error)=>{
+          console.error('Error deleting document:', error);
+          toast.error("Error deleting document")
+        })
+      });
+
+  console.log('Transaction data for the user has been deleted.');
+
+} catch (error) {
+  toast.error('Error restting Transactions')
+  console.error('Error deleting data:', error);
+}
+}
+
 async function updateTransaction(transactionData){
   
-  const transactionRef = collection(db, "transactions",transactionData.id)
+ // const transactionRef = collection(db, "transactions",transactionData.uid)
   if(transactionData.type==='income'){
     <AddIncomeModal
     isIncomeModalVisible={isIncomeModalVisible}
@@ -197,6 +240,7 @@ async function updateTransaction(transactionData){
         totalBalance={totalBalance}
         showExpenseModal={showExpenseModal}
         showIncomeModalVisible={showIncomeModalVisible}
+        resetTransaction={resetTransaction}
       />
     {/* { transactionsData.length!=0? <div className="flex-charts">
       <Charts sortedTransaction={sortedTransaction}/>
@@ -222,7 +266,7 @@ async function updateTransaction(transactionData){
     addTransaction={addTransaction} 
     fetchTransactionsData={fetchTransactionsData} 
     // getuserID={getuserIdHandler}/
-   updateTransaction={updateTransaction}
+ //  updateTransaction={updateTransaction}
    />
     </div>
   );

@@ -9,7 +9,7 @@ import  {Button} from 'antd';
 //import { type } from '@testing-library/user-event/dist/type';
 //import AddExpenseModal from '../Modals/addExpense';
 
-const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData }) => {
+const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData}) => {
     const {Option} = Select;
     const [searchTrasnaction,setSearchTransaction] = useState('');
     const [typeFilter,setTypeFilter]=useState('');
