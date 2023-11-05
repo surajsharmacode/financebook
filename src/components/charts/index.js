@@ -4,6 +4,7 @@ import PieChart from '../PieChart/PieChart';
 import { Flex } from 'antd';
 
 const  Charts = ({sortedTransaction}) => {
+  
   const data = sortedTransaction.map((item)=>{
     return {date: item.date, amount: item.amount}
   })
@@ -63,7 +64,7 @@ const  Charts = ({sortedTransaction}) => {
     <h2 style={{margin: "1rem"}}>Your Analytics</h2>
     <div className='charts-wrapper'>
    <div className='flex-stats'>
-        <div>
+        <div className='mobile-chart'>
         <Line {...config} onReady={(chartInstance) => (chart = chartInstance)} />
         </div>
          <PieChart sortedTransaction={sortedTransaction}/>

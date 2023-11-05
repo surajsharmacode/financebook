@@ -56,7 +56,7 @@ const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData
         },
         {
           title: 'Tag',
-          dataIndex: 'tag',
+          dataIndex:  'tag',
           key: 'tag',
         },
         {
@@ -107,7 +107,7 @@ const TransactionDetail = ({transactionData,addTransaction,fetchTransactionsData
               // Now results.data is an array of objects representing your CSV rows
               for (const transaction of results.data) {
                 // Write each transaction to Firebase, you can use the addTransaction function here
-                console.log("Transactions>>>", transaction);
+               // console.log("Transactions>>>", transaction);
                 const newTransaction = {
                   ...transaction,
                   amount: parseFloat(transaction.amount),
